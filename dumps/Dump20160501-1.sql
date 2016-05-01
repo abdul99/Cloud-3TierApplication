@@ -185,13 +185,13 @@ LOCK TABLES `employeesettings_settings` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `flexboxactivity`
+-- Table structure for table `dummyboxactivity`
 --
 
-DROP TABLE IF EXISTS `flexboxactivity`;
+DROP TABLE IF EXISTS `dummyboxactivity`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `flexboxactivity` (
+CREATE TABLE `dummyboxactivity` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
   `organizationId` bigint(20) NOT NULL,
   `operationId` int(11) NOT NULL,
@@ -210,25 +210,25 @@ CREATE TABLE `flexboxactivity` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `flexboxactivity`
+-- Dumping data for table `dummyboxactivity`
 --
 
-LOCK TABLES `flexboxactivity` WRITE;
-/*!40000 ALTER TABLE `flexboxactivity` DISABLE KEYS */;
-INSERT INTO `flexboxactivity` VALUES (1,1,4,1,1,'2016-04-25','2016-04-26'),(2,1,5,2,2,'2016-04-28','2016-04-29'),(6,1,4,1,2,'2016-04-28','2016-04-29'),(7,1,5,2,2,'2016-04-28','2016-04-28');
-/*!40000 ALTER TABLE `flexboxactivity` ENABLE KEYS */;
+LOCK TABLES `dummyboxactivity` WRITE;
+/*!40000 ALTER TABLE `dummyboxactivity` DISABLE KEYS */;
+INSERT INTO `dummyboxactivity` VALUES (1,1,4,1,1,'2016-04-25','2016-04-26'),(2,1,5,2,2,'2016-04-28','2016-04-29'),(6,1,4,1,2,'2016-04-28','2016-04-29'),(7,1,5,2,2,'2016-04-28','2016-04-28');
+/*!40000 ALTER TABLE `dummyboxactivity` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `flexboxmail`
+-- Table structure for table `dummyboxmail`
 --
 
-DROP TABLE IF EXISTS `flexboxmail`;
+DROP TABLE IF EXISTS `dummyboxmail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `flexboxmail` (
+CREATE TABLE `dummyboxmail` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `flexboxactivityId` bigint(20) NOT NULL,
+  `dummyboxactivityId` bigint(20) NOT NULL,
   `orgoperationmailId` bigint(20) NOT NULL,
   `status` tinyint(4) DEFAULT NULL COMMENT '1-sent 2-failed',
   `datetime` datetime NOT NULL,
@@ -236,20 +236,20 @@ CREATE TABLE `flexboxmail` (
   `lastModifiedDateTime` datetime DEFAULT NULL,
   `isDeleted` bit(1) DEFAULT NULL,
   PRIMARY KEY (`Id`),
-  KEY `Fk_flexboxactivityId_idx` (`flexboxactivityId`),
+  KEY `Fk_dummyboxactivityId_idx` (`dummyboxactivityId`),
   KEY `Fk_orgoperationmailid_idx` (`orgoperationmailId`),
-  CONSTRAINT `Fk_flexboxactivityId` FOREIGN KEY (`flexboxactivityId`) REFERENCES `flexboxactivity` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `Fk_dummyboxactivityId` FOREIGN KEY (`dummyboxactivityId`) REFERENCES `dummyboxactivity` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `Fk_orgoperationmailid` FOREIGN KEY (`orgoperationmailId`) REFERENCES `orgoperationemail` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `flexboxmail`
+-- Dumping data for table `dummyboxmail`
 --
 
-LOCK TABLES `flexboxmail` WRITE;
-/*!40000 ALTER TABLE `flexboxmail` DISABLE KEYS */;
-/*!40000 ALTER TABLE `flexboxmail` ENABLE KEYS */;
+LOCK TABLES `dummyboxmail` WRITE;
+/*!40000 ALTER TABLE `dummyboxmail` DISABLE KEYS */;
+/*!40000 ALTER TABLE `dummyboxmail` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -323,7 +323,7 @@ DROP TABLE IF EXISTS `organizationclass`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `organizationclass` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` tinyint(4) DEFAULT NULL COMMENT '1-incident 2-flexbox',
+  `type` tinyint(4) DEFAULT NULL COMMENT '1-incident 2-dummybox',
   `name` varchar(50) NOT NULL,
   `description` varchar(250) DEFAULT NULL,
   `createdDateTime` datetime DEFAULT NULL,
@@ -560,7 +560,7 @@ CREATE TABLE `weekdays` (
   PRIMARY KEY (`rid`),
   UNIQUE KEY `rid_UNIQUE` (`rid`),
   KEY `Id_idx` (`Id`),
-  CONSTRAINT `Id` FOREIGN KEY (`Id`) REFERENCES `flexboxactivity` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `Id` FOREIGN KEY (`Id`) REFERENCES `dummyboxactivity` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
